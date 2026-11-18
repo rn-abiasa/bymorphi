@@ -1,0 +1,95 @@
+---
+import Sparkle from "./Sparkle.astro";
+import { plans } from "../data/pricing";
+
+const whatsapp = (name: string) =>
+	`https://wa.me/6285935391713?text=${encodeURIComponent(`Hi Bymorphi, I'm interested in the ${name} plan.`)}`;
+---
+
+<section id="pricing" class="relative overflow-hidden rounded-[2rem] bg-beige md:rounded-[3rem]">
+	<Sparkle class="absolute right-6 top-8 size-6 text-accent md:right-[8%] md:top-14 md:size-9" />
+
+	<div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
+		<div class="grid gap-12 md:grid-cols-12 md:gap-x-12">
+			<!-- left: intro -->
+			<div class="md:col-span-4">
+				<div class="md:sticky md:top-32">
+					<h2 class="font-heading text-3xl font-normal leading-[1.1] text-balance md:text-4xl">
+						Simple prices, no surprise bill.
+					</h2>
+					<p class="mt-5 max-w-xs text-base leading-relaxed text-soft md:text-lg">
+						Pick the plan closest to your place. Tell us what you need and we will confirm the exact total before we start.
+					</p>
+				</div>
+			</div>
+
+			<!-- right: plans as a menu -->
+			<ul class="m-0 flex list-none flex-col gap-5 p-0 md:col-span-8">
+				{
+					plans.map((plan) => (
+						<li
+							class:list={[
+								"rounded-3xl p-5 sm:p-6 md:p-8",
+								plan.featured
+									? "bg-primary text-background shadow-[0_28px_50px_-28px_rgba(59,33,25,.7)]"
+									: "border-2 border-primary/15",
+							]}
+						>
+							<div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+								<h3 class="font-heading text-xl font-normal md:text-2xl">{plan.name}</h3>
+								{plan.featured && (
+									<span class="rounded-full bg-accent px-3 py-0.5 text-sm font-bold text-primary">Most chosen</span>
+								)}
+								<span aria-hidden="true" class="mb-1.5 hidden h-0 border-b-2 border-dotted border-current opacity-30 sm:block sm:flex-1" />
+								<p class="basis-full font-heading text-2xl sm:basis-auto sm:text-xl md:text-3xl">{plan.price}</p>
+							</div>
+
+							<p
+								class:list={[
+									"mt-3 max-w-lg text-base leading-relaxed",
+									plan.featured ? "text-background/80" : "text-soft",
+								]}
+							>
+								{plan.description}
+							</p>
+
+							<ul class="mt-5 grid list-none gap-x-6 gap-y-2 p-0 text-base sm:grid-cols-2">
+								{plan.features.map((feature) => (
+									<li class="flex items-start gap-2">
+										<svg
+											aria-hidden="true"
+											viewBox="0 0 24 24"
+											fill="none"
+											stroke="currentColor"
+											stroke-width="3"
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											class:list={["mt-1 size-4 shrink-0", plan.featured ? "text-secondary" : "text-accent"]}
+										>
+											<path d="M5 12.5l4.5 4.5L19 7.5" />
+										</svg>
+										{feature}
+									</li>
+								))}
+							</ul>
+
+							<a
+								href={whatsapp(plan.name)}
+								target="_blank"
+								rel="noopener noreferrer"
+								class:list={[
+									"mt-6 inline-flex h-12 w-full items-center justify-center rounded-full px-7 text-base font-bold transition duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 sm:mt-7 sm:w-auto",
+									plan.featured
+										? "bg-accent text-primary hover:bg-secondary focus-visible:outline-background"
+										: "bg-primary text-background hover:bg-accent hover:text-primary focus-visible:outline-primary",
+								]}
+							>
+								Choose {plan.name}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+</section>

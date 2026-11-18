@@ -1,0 +1,32 @@
+---
+import Sparkle from "./Sparkle.astro";
+
+const contact = "https://wa.me/6285935391713";
+---
+
+<section id="contact" class="relative overflow-hidden rounded-t-[2rem] bg-accent text-primary md:rounded-t-[3rem]">
+	<Sparkle class="absolute left-6 top-8 size-6 text-primary md:left-[6%] md:top-14 md:size-8" />
+	<Sparkle class="absolute right-8 top-16 size-9 text-background md:right-[8%] md:top-20 md:size-12" />
+
+	<div class="relative mx-auto max-w-6xl px-5 py-20 md:px-8 md:py-32">
+		<div class="grid gap-8 md:grid-cols-12 md:items-end md:gap-x-10">
+			<h2 class="font-heading text-4xl font-normal leading-[1.05] text-balance sm:text-5xl md:col-span-8 lg:text-7xl">
+				Ready to put your place online?
+			</h2>
+
+			<div class="md:col-span-4">
+				<p class="max-w-xs text-base leading-relaxed md:text-lg">
+					Tell us about your café, kitchen, or bakery. Send a message on WhatsApp and we will plan your website together.
+				</p>
+				<a
+					href={contact}
+					target="_blank"
+					rel="noopener noreferrer"
+					class="mt-7 inline-flex h-14 items-center rounded-full bg-primary px-9 text-lg font-bold text-background transition duration-200 hover:-translate-y-0.5 hover:bg-background hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+				>
+					Message us on WhatsApp
+				</a>
+			</div>
+		</div>
+	</div>
+</section>

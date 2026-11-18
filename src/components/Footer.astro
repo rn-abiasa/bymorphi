@@ -1,0 +1,78 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.png";
+
+const links = [
+	{ label: "Home", href: "#home" },
+	{ label: "About", href: "#about" },
+	{ label: "Portfolio", href: "#projects" },
+	{ label: "Pricing", href: "#pricing" },
+];
+const contact = "https://wa.me/6285935391713";
+const year = new Date().getFullYear();
+---
+
+<footer class="relative overflow-hidden bg-primary text-background">
+	<div class="mx-auto max-w-6xl px-5 pt-16 md:px-8 md:pt-24">
+		<div class="grid gap-10 md:grid-cols-12 md:gap-x-10">
+			<div class="md:col-span-6">
+				<a
+					href="#home"
+					aria-label="Bymorphi, back to top"
+					class="inline-block rounded-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background"
+				>
+					<Image src={logo} alt="" width={112} height={112} class="size-14 rounded-full object-cover" />
+				</a>
+				<p class="mt-5 max-w-xs text-base leading-relaxed text-background/80">
+					Websites for cafés, restaurants, and bakeries, made to feel as good as your taste.
+				</p>
+			</div>
+
+			<nav aria-label="Footer" class="md:col-span-3">
+				<h2 class="font-heading text-lg font-normal text-secondary">Explore</h2>
+				<ul class="mt-4 flex list-none flex-col gap-2 p-0">
+					{
+						links.map((link) => (
+							<li>
+								<a
+									href={link.href}
+									class="text-base transition-colors duration-200 hover:text-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
+								>
+									{link.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+
+			<div class="md:col-span-3">
+				<h2 class="font-heading text-lg font-normal text-secondary">Say hello</h2>
+				<ul class="mt-4 flex list-none flex-col gap-2 p-0">
+					<li>
+						<a
+							href={contact}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="text-base transition-colors duration-200 hover:text-secondary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-background"
+						>
+							WhatsApp
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<p class="mt-14 border-t border-background/20 pt-5 text-sm text-background/70 md:mt-20">
+			&copy; {year} Bymorphi. All rights reserved.
+		</p>
+	</div>
+
+	<!-- oversized brand name, slightly tucked below the edge -->
+	<p
+		aria-hidden="true"
+		class="mb-10 mt-6 select-none whitespace-nowrap text-center font-heading text-[16vw] leading-[0.85] text-accent"
+	>
+		Bymorphi
+	</p>
+</footer>

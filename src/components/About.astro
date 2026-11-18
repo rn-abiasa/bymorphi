@@ -1,0 +1,83 @@
+---
+import { Image } from "astro:assets";
+import logo from "../assets/logo.png";
+import Sparkle from "./Sparkle.astro";
+
+const points = [
+	{
+		title: "Branding that tastes right",
+		text: "Colors, type, and photos pulled from your menu and your room, so the site feels like you.",
+	},
+	{
+		title: "Easy to reserve",
+		text: "Menu, hours, and booking one tap away on a phone, where most guests find you.",
+	},
+	{
+		title: "Fast and easy to find",
+		text: "Light pages and clean HTML that load quickly and that search engines can read.",
+	},
+];
+---
+
+<section id="about" class="relative overflow-hidden rounded-t-[2rem] bg-primary text-background md:rounded-t-[3rem]">
+	<Sparkle class="absolute right-6 top-8 size-6 text-accent md:right-[10%] md:top-14 md:size-9" />
+	<Sparkle class="absolute right-[18%] top-20 hidden size-4 text-secondary md:block" />
+
+	<div class="mx-auto max-w-6xl px-5 py-16 md:px-8 md:py-28">
+		<div class="grid gap-12 md:grid-cols-12 md:gap-x-10">
+			<!-- left: title + polaroid -->
+			<div class="md:col-span-4">
+				<h2 class="font-heading text-3xl font-normal leading-[1.1] text-balance md:text-4xl">
+					Websites for places worth a second visit.
+				</h2>
+
+				<figure class="mt-10 hidden w-44 rotate-3 rounded-2xl bg-background p-2.5 pb-4 text-primary shadow-[0_24px_40px_-24px_rgba(0,0,0,.7)] md:block lg:w-52">
+					<Image src={logo} alt="Bymorphi mascot, a chibi character with round glasses" width={320} height={320} class="aspect-square w-full rounded-xl bg-secondary object-cover" />
+					<figcaption class="mt-3 text-center text-sm font-semibold">Small studio, careful work.</figcaption>
+				</figure>
+			</div>
+
+			<!-- right: statement -->
+			<div class="md:col-span-8">
+				<p class="text-2xl font-semibold leading-[1.3] text-balance sm:text-3xl lg:text-[2.6rem] lg:leading-[1.25]">
+					Bymorphi is a web studio for F&amp;B. We turn cafés, restaurants, and neighborhood kitchens into
+					websites that feel as
+					<span class="inline-flex translate-y-[0.12em] items-center gap-2 rounded-full bg-secondary px-3 py-0.5 align-baseline text-primary">
+						<svg aria-hidden="true" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="size-[0.9em]">
+							<path d="M12 26h34v12a14 14 0 0 1-14 14h-6a14 14 0 0 1-14-14V26Z"></path>
+							<path d="M46 30h4a6 6 0 0 1 0 12h-4"></path>
+						</svg>
+						warm
+					</span>
+					as the room, and make it simple for guests to
+					<span class="inline-flex translate-y-[0.12em] items-center gap-2 rounded-full bg-accent px-3 py-0.5 align-baseline text-primary">
+						<svg aria-hidden="true" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="size-[0.9em]">
+							<path d="M10 28a14 14 0 0 1 14-14h16a14 14 0 0 1 14 14c0 4-2 6-4 7v15a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4V35c-2-1-4-3-4-7Z"></path>
+						</svg>
+						book a table
+					</span>
+					or order.
+				</p>
+
+				<a
+					href="#projects"
+					class="mt-8 inline-flex items-center gap-2 border-b-2 border-accent pb-1 text-base font-bold transition-colors duration-200 hover:border-secondary hover:text-secondary focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-background"
+				>
+					See our work
+				</a>
+			</div>
+		</div>
+
+		<!-- what we care about -->
+		<div class="mt-16 grid gap-10 md:mt-24 md:grid-cols-3 md:gap-8">
+			{
+				points.map((point) => (
+					<article class="border-t border-background/25 pt-5">
+						<h3 class="font-heading text-lg font-normal text-secondary">{point.title}</h3>
+						<p class="mt-3 max-w-xs text-base leading-relaxed text-background/80">{point.text}</p>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

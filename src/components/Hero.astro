@@ -1,0 +1,229 @@
+---
+import Sparkle from "./Sparkle.astro";
+import { projects } from "../data/projects";
+
+const contact = "https://wa.me/6285935391713";
+
+// The curve needs enough cards to fill the arc; extra ones repeat the projects.
+const TOTAL = 8;
+const items = Array.from({ length: TOTAL }, (_, i) => ({
+	...projects[i % projects.length],
+	clone: i >= projects.length,
+}));
+---
+
+<section id="home" class="relative overflow-hidden pb-12 md:pb-20">
+	<!-- soft background shapes -->
+	<div aria-hidden="true" class="pointer-events-none absolute -left-24 top-28 size-60 rounded-full bg-beige md:size-96"></div>
+	<div aria-hidden="true" class="pointer-events-none absolute -right-20 top-80 size-48 rounded-full bg-secondary/40 md:size-72"></div>
+
+	<div class="relative mx-auto flex max-w-3xl flex-col items-center px-5 pt-20 text-center md:pt-32 lg:pt-40">
+		<!-- food doodles -->
+		<svg
+			aria-hidden="true"
+			viewBox="0 0 64 64"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="3"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			class="absolute left-3 top-4 size-12 -rotate-12 text-primary md:-left-20 md:top-24 md:size-20 lg:-left-32"
+		>
+			<path d="M12 26h34v12a14 14 0 0 1-14 14h-6a14 14 0 0 1-14-14V26Z" fill="#ffbd91"></path>
+			<path d="M46 30h4a6 6 0 0 1 0 12h-4"></path>
+			<path d="M22 6c-3 4 3 6 0 11M32 6c-3 4 3 6 0 11M42 6c-3 4 3 6 0 11"></path>
+			<path d="M8 58h42"></path>
+		</svg>
+		<svg
+			aria-hidden="true"
+			viewBox="0 0 64 64"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="3"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			class="absolute right-3 top-6 size-12 rotate-12 text-primary md:-right-20 md:top-40 md:size-20 lg:-right-32"
+		>
+			<path d="M10 28a14 14 0 0 1 14-14h16a14 14 0 0 1 14 14c0 4-2 6-4 7v15a4 4 0 0 1-4 4H18a4 4 0 0 1-4-4V35c-2-1-4-3-4-7Z" fill="#f7d9b2"></path>
+			<path d="M24 24l-3 8M33 22l-3 10M42 24l-3 8"></path>
+		</svg>
+
+		<h1 class="font-heading text-[2.5rem] font-normal leading-[1.05] text-balance text-primary sm:text-6xl lg:text-7xl">
+			Crafting digital as your taste.
+		</h1>
+
+		<p class="mt-6 max-w-md text-balance text-base leading-relaxed text-soft md:mt-8 md:text-lg">
+			We build websites that serve F&amp;B brands. Crafting digital experiences as good as your taste.
+		</p>
+
+		<div class="relative mt-8 md:mt-10">
+			<Sparkle class="absolute -left-9 -top-4 size-6 text-accent" />
+			<Sparkle class="absolute -right-7 -bottom-3 size-4 text-primary" />
+			<a
+				href={contact}
+				target="_blank"
+				rel="noopener noreferrer"
+				class="inline-flex h-12 items-center rounded-full bg-accent px-8 text-base font-bold text-primary transition duration-200 hover:-translate-y-0.5 hover:bg-primary hover:text-background focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-primary"
+			>
+				Let&rsquo;s Build with Us
+			</a>
+		</div>
+	</div>
+
+	<!-- curved project carousel -->
+	<div class="relative mt-14 md:mt-20">
+		<svg
+			aria-hidden="true"
+			viewBox="0 0 120 16"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="3"
+			stroke-linecap="round"
+			class="absolute left-5 top-3 z-[500] w-20 text-accent md:left-[7%] md:top-6 md:w-28"
+		>
+			<path d="M2 8c10-10 18 10 28 0s18 10 28 0 18 10 28 0 18 10 28 0"></path>
+		</svg>
+
+		
+
+		<div
+			data-arc
+			class="relative h-[260px] w-full overflow-hidden opacity-0 transition-opacity duration-1000 data-ready:opacity-100 md:h-[400px] lg:h-[480px]"
+		>
+			<ul class="m-0 list-none p-0">
+				{
+					items.map((p) => (
+						<li
+							data-arc-item
+							class="group absolute left-0 top-4 w-[176px] will-change-transform hover:z-999! focus-within:z-999! md:w-[300px] lg:w-[360px]"
+						>
+							<a
+								href={p.url}
+								aria-label={`View project: ${p.name}`}
+								aria-hidden={p.clone ? "true" : undefined}
+								tabindex={p.clone ? -1 : undefined}
+								style={`background-color:${p.color}`}
+								class="@container relative block aspect-[16/10] overflow-hidden rounded-2xl text-white shadow-[0_18px_40px_-18px_rgba(59,33,25,.55)] ring-1 ring-primary/10 transition duration-300 ease-out group-hover:-translate-y-3 group-hover:scale-[1.06] group-hover:shadow-[0_32px_60px_-20px_rgba(59,33,25,.6)] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-primary md:rounded-3xl"
+							>
+								{p.image ? (
+									<img src={p.image} alt="" loading="lazy" class="size-full object-cover" />
+								) : (
+									<div aria-hidden="true" class="flex size-full flex-col">
+										<div class="flex items-center justify-between px-[6cqw] pt-[5cqw]">
+											<span class="font-serif text-[4cqw]">{p.name}</span>
+											<span class="flex gap-[1.5cqw]">
+												<i class="h-[1cqw] w-[6cqw] rounded-full bg-white/60" />
+												<i class="h-[1cqw] w-[6cqw] rounded-full bg-white/60" />
+												<i class="h-[1cqw] w-[6cqw] rounded-full bg-white/60" />
+											</span>
+										</div>
+										<div class="flex flex-1 flex-col items-center justify-center px-[10cqw] pb-[6cqw] text-center">
+											<p class="font-serif text-[9cqw] leading-[1.05]">{p.name}</p>
+											<p class="mt-[3cqw] max-w-[70cqw] text-[3.4cqw] leading-snug text-white/80">{p.tagline}</p>
+											<span class="mt-[4cqw] rounded-full bg-white px-[4cqw] py-[1.3cqw] text-[3cqw] font-bold" style={`color:${p.color}`}>
+												Reserve
+											</span>
+										</div>
+									</div>
+								)}
+								<span class="absolute bottom-[4cqw] left-1/2 -translate-x-1/2 translate-y-2 whitespace-nowrap rounded-full bg-background px-[4.5cqw] py-[1.8cqw] text-[3.6cqw] font-bold text-primary opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100">
+									View project
+								</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</div>
+</section>
+
+<script>
+	const init = () => {
+		const root = document.querySelector<HTMLElement>("[data-arc]");
+		if (!root) return;
+		const items = Array.from(root.querySelectorAll<HTMLElement>("[data-arc-item]"));
+		if (items.length === 0) return;
+
+		const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+		const LOOP_MS = 50000; // one full lap of the arc
+		let progress = 0.06;
+		let speed = 1;
+		let target = 1;
+		let last = 0;
+		let raf = 0;
+		let visible = true;
+		let W = 0;
+		let CW = 0;
+		let CH = 0;
+
+		const measure = () => {
+			W = root.clientWidth;
+			CW = items[0].offsetWidth;
+			CH = items[0].offsetHeight;
+		};
+
+		// Cards ride a parabola: center is highest, edges sag and tilt outward.
+		const place = () => {
+			const n = items.length;
+			const spread = W + CW * 1.5; // wide enough that wrapping happens off screen
+			const drop = CH * 0.8;
+			items.forEach((el, i) => {
+				const f = (((i / n + progress) % 1) + 1) % 1;
+				const u = f * 2 - 1; // -1 (left) .. 1 (right)
+				const x = W / 2 - CW / 2 + (u * spread) / 2;
+				const y = drop * u * u;
+				const rot = (Math.atan((2 * drop * u) / (spread / 2)) * 180) / Math.PI;
+				el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg)`;
+				el.style.zIndex = String(Math.round(100 - Math.abs(u) * 90));
+			});
+		};
+
+		const tick = (t: number) => {
+			const dt = last ? Math.min(t - last, 50) : 16;
+			last = t;
+			speed += (target - speed) * 0.06 * (dt / 16);
+			progress -= (dt / LOOP_MS) * speed; // moves right to left
+			place();
+			raf = requestAnimationFrame(tick);
+		};
+
+		const start = () => {
+			if (raf || reduce.matches || !visible) return;
+			last = 0;
+			raf = requestAnimationFrame(tick);
+		};
+		const stop = () => {
+			cancelAnimationFrame(raf);
+			raf = 0;
+		};
+
+		items.forEach((el) => {
+			el.addEventListener("pointerenter", (e) => {
+				if (e.pointerType === "mouse") target = 0;
+			});
+			el.addEventListener("pointerleave", () => (target = 1));
+			el.addEventListener("focusin", () => (target = 0));
+			el.addEventListener("focusout", () => (target = 1));
+		});
+
+		new ResizeObserver(() => {
+			measure();
+			place();
+		}).observe(root);
+
+		new IntersectionObserver(([entry]) => {
+			visible = entry.isIntersecting;
+			visible ? start() : stop();
+		}).observe(root);
+
+		reduce.addEventListener("change", () => (reduce.matches ? stop() : start()));
+
+		measure();
+		place();
+		root.setAttribute("data-ready", "");
+		start();
+	};
+
+	init();
+</script>
